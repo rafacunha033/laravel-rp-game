@@ -1,22 +1,6 @@
+@extends('layouts.game')
 
+@section('gameContent')
 
-
-
-{{ $game->name }}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@endsection
 
