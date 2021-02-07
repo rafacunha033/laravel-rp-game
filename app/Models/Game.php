@@ -21,4 +21,9 @@ class Game extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class);
+    }
 }

@@ -40,7 +40,6 @@ class UserController extends Controller
         // if(Gate::denies('view-admin')) {
         //     return abort(403, 'Não Autorizado');
         // }
-
         $users = User::all();
 
         $admins = array();

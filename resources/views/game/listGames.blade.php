@@ -17,7 +17,7 @@
                 </ul>
             
                 <div class="card-body mx-auto">
-                    <a class="btn btn-primary" href="{{ route('join.game', ['game_id' => $game->id]) }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <a class="btn btn-primary" href="{{ route('create.round', ['game_id' => $game->id]) }}" role="button" aria-expanded="false" aria-controls="collapseExample">
                         Entrar
                     </a>
                 </div>

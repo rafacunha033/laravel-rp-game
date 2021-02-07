@@ -65,5 +65,8 @@ class User extends Authenticatable
         return $this->belongsToMany(Game::class);
     }
 
-   
+    public function countries()
+    {
+        return $this->belongsTo(Country::class);
+    }
 }
