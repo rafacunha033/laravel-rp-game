@@ -41,7 +41,7 @@ class GameUserController extends Controller
     public function create()
     {
         $countries = Country::all();
-        return view('game/create', [
+        return view('game/choose', [
             'countries' => $countries,
         ]);
     }
