@@ -29,7 +29,7 @@
                     <h5 class="card-title">{{ $game['Name'] }}</h5>
                 
                     <p class="card-text">
-                        <a class="btn btn-dark text-white " href="{{ route('show.game', ['game_id' => $game['Id']]) }}">Entrar</a>
+                        <a class="btn btn-dark text-white " href="{{ route('show.round', ['game_id' => $game['Id']]) }}">Entrar</a>
                     </p>
                 </div>
             </div>

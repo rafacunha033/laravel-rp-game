@@ -7,14 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
+    // public function gameInstance()
+    // {
+    //     return $this->belongsToMany(GameInstance::class);
+    // }
    
-    public function users()
+    public function gameUser()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany(GameUser::class);
     }
 
-    public function games() 
-    {
-        return $this->belongsToMany(Game::class);
-    }
+    // public function users()
+    // {
+    //     return $this->belongsToMany(User::class);
+    // }
+
+    // public function games() 
+    // {
+    //     return $this->belongsToMany(Game::class);
+    // }
 }

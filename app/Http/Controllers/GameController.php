@@ -51,20 +51,8 @@ class GameController extends Controller
     }   
 
 
-    public function show($game_id) 
-    {        
-        $game = Game::find($game_id);
-        // dd($game->users);
-        
-        $user = Auth::user();
-        $hasUser = $game->users()->where('user_id', $user->id)->exists();
-        
-        if(!$hasUser === true) {
-            return abort(403, 'Não Autorizado');
-        }
-
-        return view('game/round', [
-            'game' => $game,
-        ]);
+    public function show() 
+    {    
+        // 
     }
 }

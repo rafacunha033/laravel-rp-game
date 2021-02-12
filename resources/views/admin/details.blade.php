@@ -1,8 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
 <div class="container d-flex justify-content-center">
     <div class="card" style="width: 18rem;">
         <div class="card-header text-white bg-dark">

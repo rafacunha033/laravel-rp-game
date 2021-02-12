@@ -29,9 +29,7 @@ class HomeController extends Controller
     }
 
     public function rolesPermission()
-    {
-        
-
+    {      
         $users = User::all();
         foreach ($users as $user) 
         {

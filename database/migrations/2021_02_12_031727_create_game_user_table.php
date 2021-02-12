@@ -17,12 +17,10 @@ class CreateGameUserTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('game_id');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('country_id');            
             $table->timestamps();
 
             $table->foreign('game_id')->references('id')->on('games');            
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('country_id')->references('id')->on('countries');
         });
     }
 

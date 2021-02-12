@@ -18,7 +18,6 @@ class CreateCountriesTable extends Migration
             $table->string('name');
             $table->string('img_slug');
             $table->timestamps();
-
         });
     }
 

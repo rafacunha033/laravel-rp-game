@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Game;
 use App\Models\Country;
+use App\Models\GameInstance;
+use App\Models\GameUser;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -38,11 +40,12 @@ class GameUserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($game_id)
     {
         $countries = Country::all();
         return view('game/choose', [
             'countries' => $countries,
+            'game_id'   => $game_id,
         ]);
     }
 
@@ -52,8 +55,12 @@ class GameUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $game_id)
-    {
+    public function store(Request $request)
+    {       
+
+        $country_id = $request->id; 
+        $game_id = $request->game_id;
+
         $game = Game::find($game_id);
         $user = Auth::user();
         $hasUser = $game->users()->where('user_id', $user->id)->exists();
@@ -63,8 +70,10 @@ class GameUserController extends Controller
         }        
       
         $game->users()->attach($user);
+        $game->countries()->attach($country_id);
         
-        return redirect()->route('show.game', [
+        
+        return redirect()->route('show.round', [
             'game_id' => $game_id,
         ]);
     }
@@ -76,9 +85,16 @@ class GameUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show($game_id)
     {
-        //
+        $user_game = GameUser::where('game_id', $game_id)->first();
+
+        dd($user_game->country);
+
+        return view('game/round', [
+            'game_id' => $game_id,
+            // 'game_instance' => $game_instance,
+        ]);
     }
 
     /**
