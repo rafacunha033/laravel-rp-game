@@ -24,15 +24,15 @@ class CreateGameTable extends Migration
         });
 
 
-        Schema::create('game_admin', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('game_id');
-            $table->unsignedBigInteger('user_id');            
-            $table->timestamps();
+        // Schema::create('game_admin', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->unsignedBigInteger('game_id');
+        //     $table->unsignedBigInteger('user_id');            
+        //     $table->timestamps();
 
-            $table->foreign('game_id')->references('id')->on('games');            
-            $table->foreign('user_id')->references('id')->on('users');
-        });
+        //     $table->foreign('game_id')->references('id')->on('games');            
+        //     $table->foreign('user_id')->references('id')->on('users');
+        // });
     }
 
     /**

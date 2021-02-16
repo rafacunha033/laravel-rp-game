@@ -17,13 +17,13 @@ class Game extends Model
         'remember_token',
     ];
 
+    public function countries()
+    {
+        return $this->hasMany(Country::class);
+    }
+    
     public function users()
     {
         return $this->belongsToMany(User::class);
-    }
-
-    public function countries()
-    {
-        return $this->belongsToMany(Country::class);
     }
 }

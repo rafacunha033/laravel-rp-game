@@ -60,13 +60,13 @@ class User extends Authenticatable
         return $this->roles->contains('name',$roles);
     }
 
+    public function countries()
+    {
+        return $this->belongsToMany(Country::class,'maps');
+    }
+
     public function games()
     {
         return $this->belongsToMany(Game::class);
-    }
-
-    public function countries()
-    {
-        return $this->belongsToMany(Country::class);
     }
 }

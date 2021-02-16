@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Game;
 use App\Models\Country;
-use App\Models\GameInstance;
-use App\Models\GameUser;
+use App\Models\Map;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -19,19 +18,25 @@ class GameUserController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $games = array();
-        foreach($user->games as $game){
-            $newGame = array(
-                "Id" => $game->id,
-                "Name" => $game->name
-            );
+        // $user = Auth::user();
+        // $games = array();
+        // foreach($user->games as $game){
+        //     $newGame = array(
+        //         "Id" => $game->id,
+        //         "Name" => $game->name
+        //     );
 
-            array_push($games, $newGame);
-        }
+        //     array_push($games, $newGame);
+        // }
+        $user = Auth::user();
+
+
+        // $countries = Country::all();
+        // $user_country = $countries->users();
+        // dd($countries->users()->get());
 
         return view('game/myGames', [
-            'games' => $games,
+            'user' => $user,
         ]);
     }
 
@@ -42,10 +47,35 @@ class GameUserController extends Controller
      */
     public function create($game_id)
     {
-        $countries = Country::all();
+        $user = Auth::user();
+        $userGames = array();
+        foreach($user->countries as $country) {            
+            array_push($userGames, $country->game_id);
+        }
+
+        if(in_array($game_id, $userGames)) {
+            return abort(403, 'Não Autorizado! Verifique se já não está na partida');
+        }
+
+        $countries = Country::where('game_id', $game_id)->get();
+        $free = array();
+        foreach($countries as $country) {           
+            if($country->users->first() == null) {
+                $newArray = array(
+                    'Name' => $country->name, 
+                ); 
+                array_push($free, $newArray); 
+            }
+            
+        }
+            
+        
+
+        dd($free);
+        
         return view('game/choose', [
-            'countries' => $countries,
             'game_id'   => $game_id,
+            'countries' => $countries,
         ]);
     }
 
@@ -87,13 +117,14 @@ class GameUserController extends Controller
      */
     public function show($game_id)
     {
-        $user_game = GameUser::where('game_id', $game_id)->first();
-
-        dd($user_game->country);
+        $map = Map::where('game_id', $game_id)->first();
+        $country = $map->country_id;
+        // $country = $game->map->where('user_id', Auth::user()->id)->first();
+        dd($country);
+        // $user = $game->map->where('game_id', $game_id)->first();
 
         return view('game/round', [
-            'game_id' => $game_id,
-            // 'game_instance' => $game_instance,
+            'country' => $country,
         ]);
     }
 

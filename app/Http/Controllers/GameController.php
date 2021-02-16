@@ -12,10 +12,11 @@ use Auth;
 class GameController extends Controller
 {    
     public function index(Game $games)
-    {        
+    {      
         if(!Auth::check()) {
             return abort(403, 'Não Autorizado');
         }
+        
         $games = Game::orderByDesc('created_at')->get();
         return view('game/listGames', [
             'games' => $games

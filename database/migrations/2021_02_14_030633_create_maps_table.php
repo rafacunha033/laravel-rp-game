@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGameInstanceTable extends Migration
+class CreateMapsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateGameInstanceTable extends Migration
      */
     public function up()
     {
-        Schema::create('game_instance', function (Blueprint $table) {
+        Schema::create('maps', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('game_user_id');
             $table->unsignedBigInteger('country_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
-            
-            $table->foreign('game_user_id')->references('id')->on('game_user');     
-            $table->foreign('country_id')->references('id')->on('countries');     
+
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -31,6 +31,6 @@ class CreateGameInstanceTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('game_instance');
+        Schema::dropIfExists('maps');
     }
 }
