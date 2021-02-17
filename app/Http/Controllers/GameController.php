@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use App\Models\Game;
 use App\Models\User;
+use App\Models\Country;
 use Gate;
 use Auth;
 
@@ -45,8 +47,16 @@ class GameController extends Controller
         $game->password = Hash::make($request->password);
         $game->save(); 
 
-        // $user = User::find(Auth::user()->id);
+        $countries = array("Prussia", "Espanha", "França", "Império Russo");
         
+        foreach($countries as $key => $country) {
+            $newCountry = new Country();
+            $newCountry->game_id  = $game->id;
+            $newCountry->name     = $country;
+            $newCountry->img_slug = Str::slug($country).'.png';
+            $newCountry->save(); 
+        }
+        // $user = User::find(Auth::user()->id);
         // $user->games()->attach($game->id);
         return redirect()->route('home');
     }   

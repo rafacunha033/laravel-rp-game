@@ -66,12 +66,7 @@ class GameUserController extends Controller
                 ); 
                 array_push($free, $newArray); 
             }
-            
-        }
-            
-        
-
-        dd($free);
+        }            
         
         return view('game/choose', [
             'game_id'   => $game_id,
@@ -87,22 +82,13 @@ class GameUserController extends Controller
      */
     public function store(Request $request)
     {       
-
-        $country_id = $request->id; 
         $game_id = $request->game_id;
+        $country_id = $request->id;
+        $user_id = Auth::user()->id;
 
-        $game = Game::find($game_id);
-        $user = Auth::user();
-        $hasUser = $game->users()->where('user_id', $user->id)->exists();
-        
-        if($hasUser === true) {
-            return abort(403, 'Não Autorizado! Verifique se já não está na partida');
-        }        
-      
-        $game->users()->attach($user);
-        $game->countries()->attach($country_id);
-        
-        
+        $country = Country::find($country_id);
+        $country->users()->attach($user_id);
+
         return redirect()->route('show.round', [
             'game_id' => $game_id,
         ]);
@@ -117,14 +103,11 @@ class GameUserController extends Controller
      */
     public function show($game_id)
     {
-        $map = Map::where('game_id', $game_id)->first();
-        $country = $map->country_id;
-        // $country = $game->map->where('user_id', Auth::user()->id)->first();
-        dd($country);
-        // $user = $game->map->where('game_id', $game_id)->first();
-
+        // $countries = Country::where('game_id', $game_id)->get();
+        $user = User::find(Auth::user()->id);
+        
         return view('game/round', [
-            'country' => $country,
+            // 'country' => $country,
         ]);
     }
 

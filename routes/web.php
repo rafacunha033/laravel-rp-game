@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/debug', [App\Http\Controllers\HomeController::class, 'show'])->name('show.home');
 
 Route::get('/jogo/listar', [App\Http\Controllers\GameController::class, 'index'])->name('index.game');
 Route::get('/jogo/criar', [App\Http\Controllers\GameController::class, 'create'])->name('create.game');

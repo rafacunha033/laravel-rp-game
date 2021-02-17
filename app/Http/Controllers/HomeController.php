@@ -28,17 +28,31 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function rolesPermission()
-    {      
-        $users = User::all();
-        foreach ($users as $user) 
-        {
-            echo $user->name." -> ";
+    public function show() 
+    {
+        $countryNames = array("Prussia", "Espanha", "França");
+        $countryImg = array("prussia.png", "espanha.png", "franca.png");
         
-            $roles = $user->roles;
-            foreach($roles as $role) {
-                echo $role->name.", ";
-            }
+        $countries = array(
+                "name" => array(),
+                "img_slug"  => array(),   
+        );
+
+        foreach(array_combine($countryNames, $countryImg) as $country => $img) {
+            array_push($countries['name'], $country);
+            array_push($countries['img_slug'], $img);
         }
+        dd($countries);
+        foreach($countries as $country) {
+            
+            dd($country);
+            // $newCountry = new Country();
+            // $newCountry->game_id  = $game->id;
+            // $newCountry->name     = $country['name'];
+            // $newCountry->img_slug = $country['img_slug'];
+            // $newCountry->save(); 
+        }
+
+        return dd($countries);
     }
 }

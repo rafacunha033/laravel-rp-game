@@ -24,7 +24,7 @@
     <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light bg-dark shadow-sm">
             <div class="container">        
-                <a class="navbar-brand text-white" href="{{ url('/') }}">
+                <a class="navbar-brand text-white" href="{{ url('/home') }}">
                     <!-- <img src="..." width="30" height="30" class="d-inline-block align-center" alt=""> -->
                     W&D
                 </a>
