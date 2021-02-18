@@ -103,11 +103,11 @@ class GameUserController extends Controller
      */
     public function show($game_id)
     {
-        // $countries = Country::where('game_id', $game_id)->get();
-        $user = User::find(Auth::user()->id);
+        $user = Auth::user();
+        $country = $user->countries->where('game_id', $game_id)->first();
         
         return view('game/round', [
-            // 'country' => $country,
+            'country' => $country,
         ]);
     }
 

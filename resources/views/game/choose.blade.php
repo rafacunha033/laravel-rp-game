@@ -8,8 +8,11 @@
                 <div class="card-header text-primary">{{ __('Escolha sua nação') }}</div>
 
                 <div class="card-body">                        
-                        <div class="accordion" id="accordionExample">
-                        @foreach($countries as $country)
+                    <div class="accordion" id="countryAccordion">
+                    <table class="table table-striped table-borderless table-sm">
+                    @foreach($countries as $country)
+                    <tr>
+                        <td>
                             <form action="{{ route('store.round') }}">
                             @csrf
 
@@ -24,25 +27,31 @@
                                     </div>
                                 </div>         -->
                                 <div class="card">
-                                    <div class="card-header" id="heading{{ $country->id }}">
+                                    <div class="card-header border-bottom-0" id="heading{{ $country->id }}">
                                     <h2 class="mb-0">
-                                        <button class="btn btn-link btn-block text-left text-secondary text-decoration-none" type="button" data-toggle="collapse" data-target="#collapse{{ $country->id }}" aria-expanded="false" aria-controls="collapse{{ $country->id }}">
+                                        <button class="btn btn-link btn-block text-left text-secondary text-decoration-none " type="button" data-toggle="collapse" data-target="#collapse{{ $country->id }}" aria-expanded="false" aria-controls="collapse{{ $country->id }}">
                                             {{ $country->name }}
                                         </button>
                                     </h2>
                                     </div>
 
-                                    <div id="collapse{{ $country->id }}" class="collapse" aria-labelledby="heading{{ $country->id }}" data-parent="#accordionExample">
-                                        <div class="card-body d-flex justify-content-end">
+                                    <div id="collapse{{ $country->id }}" class="collapse border-top" aria-labelledby="heading{{ $country->id }}" data-parent="#countryAccordion">
+                                        <div class="mt-3 text-secondary d-flex justify-content-center">
+                                            Tem certeza que deseja entrar?
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
                                             <button class="submit btn btn-primary">
                                                 Entrar
                                             </button>    
                                         </div>
                                     </div>
                                 </div>        
-                            </form>                
-                        @endforeach
-                        </div>
+                            </form>   
+                        </td>
+                    </tr>                 
+                    @endforeach
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
