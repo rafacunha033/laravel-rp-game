@@ -27,5 +27,5 @@ class Game extends Model
         return $this->belongsToMany(User::class);
     }
 
-    
+   
 }

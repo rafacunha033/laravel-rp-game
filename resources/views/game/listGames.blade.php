@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row d-flex justify-content-stretch">
         @foreach($games as $game) 
+        
         <div class="mx-3 mt-3">
             <div class="card" style="min-width: 15rem; max-width: 20rem;">
                 <img src="..." class="card-img-top" alt="...">
@@ -13,7 +14,7 @@
                 </div>
 
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Participantes (( 2/10 )) -> Exemplo</li>
+                    <li class="list-group-item">Jogadores:</li>
                 </ul>
             
                 <div class="card-body mx-auto">
