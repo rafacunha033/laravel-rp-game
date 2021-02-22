@@ -108,6 +108,7 @@ class GameUserController extends Controller
         
         return view('game/round', [
             'country' => $country,
+            'user' => $user,
         ]);
     }
 
