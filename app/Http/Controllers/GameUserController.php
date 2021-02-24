@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Game;
 use App\Models\Country;
 use App\Models\Map;
+use App\Models\Provinces;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -18,22 +19,7 @@ class GameUserController extends Controller
      */
     public function index()
     {
-        // $user = Auth::user();
-        // $games = array();
-        // foreach($user->games as $game){
-        //     $newGame = array(
-        //         "Id" => $game->id,
-        //         "Name" => $game->name
-        //     );
-
-        //     array_push($games, $newGame);
-        // }
         $user = Auth::user();
-
-
-        // $countries = Country::all();
-        // $user_country = $countries->users();
-        // dd($countries->users()->get());
 
         return view('game/myGames', [
             'user' => $user,
@@ -61,8 +47,9 @@ class GameUserController extends Controller
         $free = array();
         foreach($countries as $country) {           
             if($country->users->first() == null) {
-                $newArray = array(
-                    'Name' => $country->name, 
+                $newArray = array( 
+                    'id'   => $country->id,
+                    'name' => $country->name,
                 ); 
                 array_push($free, $newArray); 
             }
@@ -70,7 +57,7 @@ class GameUserController extends Controller
         
         return view('game/choose', [
             'game_id'   => $game_id,
-            'countries' => $countries,
+            'countries' => $free,
         ]);
     }
 
@@ -105,10 +92,14 @@ class GameUserController extends Controller
     {
         $user = Auth::user();
         $country = $user->countries->where('game_id', $game_id)->first();
+        $provinces = $country->provinces;
         
+        
+
         return view('game/round', [
             'country' => $country,
             'user' => $user,
+            'provinces' => $provinces,
         ]);
     }
 

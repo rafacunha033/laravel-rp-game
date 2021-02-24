@@ -10,26 +10,19 @@
                 <div class="card-body">                        
                     <div class="accordion" id="countryAccordion">
                     <table class="table table-striped table-borderless table-sm">
-                        <form action="{{ route('store.round') }}">
                         @csrf
                             @foreach($countries as $country)
+                            <form action="{{ route('store.round') }}">
                                 <tr>                                   
-                                    <input type="hidden" name="id" value="{{ $country->id }}">
+                                    <input type="hidden" name="id" value="{{ $country['id'] }}">
                                     <input type="hidden" name="game_id" value="{{ $game_id }}">
-                                        <!-- <div class="card mt-1">
-                                            <div class="card-body">
-                                                <a class="text-secondary text-decoration-none stretched-link" href="">
-                                                    <img src="../images/{{ $country->img_slug }}" alt="Bandeira da Prussia" width="40" height="30">
-                                                    {{ $country->name }}
-                                                </a>
-                                            </div>
-                                        </div>         -->
+        
                                     <div class="card">
-                                            <button  id="heading{{ $country->id }}" class="btn btn-link btn-block text-left text-secondary text-decoration-none" type="button" data-toggle="collapse" data-target="#collapse{{ $country->id }}" aria-expanded="false" aria-controls="collapse{{ $country->id }}">
-                                                {{ $country->name }}
+                                            <button  id="heading{{ $country['id'] }}" class="btn btn-link btn-block text-left text-secondary text-decoration-none" type="button" data-toggle="collapse" data-target="#collapse{{ $country['id'] }}" aria-expanded="false" aria-controls="collapse{{ $country['id'] }}">
+                                                {{ $country['name'] }}
                                             </button>
 
-                                        <div id="collapse{{ $country->id }}" class="collapse border-top" aria-labelledby="heading{{ $country->id }}" data-parent="#countryAccordion">
+                                        <div id="collapse{{ $country['id'] }}" class="collapse border-top" aria-labelledby="heading{{ $country['id'] }}" data-parent="#countryAccordion">
                                             <div class="mt-3 text-secondary d-flex justify-content-center">
                                                 Tem certeza que deseja entrar?
                                             </div>
@@ -40,9 +33,9 @@
                                             </div>
                                         </div>
                                     </div>   
-                                </tr>                 
-                            @endforeach
-                            </form>    
+                                </tr>   
+                            </form>                 
+                            @endforeach 
                         </table>
                     </div>
                 </div>

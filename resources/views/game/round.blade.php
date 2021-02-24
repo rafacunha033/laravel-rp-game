@@ -21,6 +21,19 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/d3js/6.5.0/d3.min.js"></script>
 
+    <style>
+        .str0 {
+            stroke: #FFFF;
+            stroke-width: 280
+        }
+        .fill {
+            fill: #84c225
+        }
+        .hover {
+            fill: #196cfc
+        }
+    </style>
+
 <?php $styleCard = "flex-sm-fill d-flex align-items-center justify-content-center"; ?>
 </head>
 <body>
@@ -111,7 +124,18 @@
         <!-- Provinces -->
         <div id="collapseProvinces" class="collapse show" aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
             <div class="card-body">
-                Provincias    
+               @foreach($provinces as $province)
+                <strong>{{ $province->name }}</strong> 
+               <br>
+                População: {{ number_format($province->population, 0, ',', '.') }}
+               <br>
+                Recursos: <br>
+                @foreach($province->resources as $resource)
+                    {{ $resource->name }} : {{ $resource->pivot->amount }}/h  <br>
+                @endforeach 
+               <hr>
+
+               @endforeach
             </div>
         </div> 
 
