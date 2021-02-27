@@ -39,4 +39,3 @@ Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->nam
 Route::get('/users/admin', [App\Http\Controllers\UserController::class, 'showRole'])->name('showRole.user');
 Route::get('/users/{user}', [App\Http\Controllers\UserController::class, 'show'])->name('show.user');
 Route::delete('/users/{user}', [App\Http\Controllers\UserController::class, 'destroy'])->name('destroy.user');
-

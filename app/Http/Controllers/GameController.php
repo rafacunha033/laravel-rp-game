@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UsersImport;
 use App\Models\Game;
 use App\Models\User;
 use App\Models\Country;
@@ -47,9 +49,7 @@ class GameController extends Controller
         $game->user_id  = Auth::user()->id;
         $game->name     = $request->name;
         $game->password = Hash::make($request->password);
-        $game->save(); 
-
-        $countries = array("Prussia", "Espanha", "França", "Império Russo");
+        $game->save();    
         
         foreach($countries as $key => $country) {
             $newCountry = new Country();

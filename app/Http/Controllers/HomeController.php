@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Country;
 use Auth;
 
 class HomeController extends Controller
@@ -30,29 +32,15 @@ class HomeController extends Controller
 
     public function show() 
     {
-        $countryNames = array("Prussia", "Espanha", "França");
-        $countryImg = array("prussia.png", "espanha.png", "franca.png");
-        
-        $countries = array(
-                "name" => array(),
-                "img_slug"  => array(),   
-        );
+        $array = (new CountriesImport)->toArray(storage_path('users.xlsx'));
+        $new = array();
 
-        foreach(array_combine($countryNames, $countryImg) as $country => $img) {
-            array_push($countries['name'], $country);
-            array_push($countries['img_slug'], $img);
+        foreach($array[0] as $indice => $sheet){
+            array_push($new, $sheet[1]);
+             
         }
-        dd($countries);
-        foreach($countries as $country) {
-            
-            dd($country);
-            // $newCountry = new Country();
-            // $newCountry->game_id  = $game->id;
-            // $newCountry->name     = $country['name'];
-            // $newCountry->img_slug = $country['img_slug'];
-            // $newCountry->save(); 
-        }
-
-        return dd($countries);
+        return dd($new);
+         
     }
+
 }

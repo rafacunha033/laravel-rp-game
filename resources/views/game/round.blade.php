@@ -131,7 +131,7 @@
                <br>
                 Recursos: <br>
                 @foreach($province->resources as $resource)
-                    {{ $resource->name }} : {{ $resource->pivot->amount }}/h  <br>
+                    {{ $resource->name }} : {{ $resource->pivot->amount }}  <br>
                 @endforeach 
                <hr>
 

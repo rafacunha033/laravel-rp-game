@@ -93,8 +93,6 @@ class GameUserController extends Controller
         $user = Auth::user();
         $country = $user->countries->where('game_id', $game_id)->first();
         $provinces = $country->provinces;
-        
-        
 
         return view('game/round', [
             'country' => $country,
@@ -111,7 +109,7 @@ class GameUserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        
     }
 
     /**
