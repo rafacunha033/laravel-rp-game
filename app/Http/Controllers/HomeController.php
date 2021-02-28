@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\UsersImport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Http\Request;
 use App\Models\Country;
+use App\Imports\CountriesImport;
+use App\Imports\ProvincesImport;
+use Maatwebsite\Excel\Facades\Excel;
 use Auth;
+use App\Http\Controllers\ExcelController;
 
 class HomeController extends Controller
 {
@@ -30,17 +32,34 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function show() 
+
+
+    public function show(ExcelController $excel) 
     {
-        $array = (new CountriesImport)->toArray(storage_path('users.xlsx'));
-        $new = array();
+        // $excelCountries = (new CountriesImport)->toArray(storage_path('users.xlsx'));
+        // $countries = array();
 
-        foreach($array[0] as $indice => $sheet){
-            array_push($new, $sheet[1]);
-             
-        }
-        return dd($new);
-         
+        // foreach($excelCountries[0] as $key => $row){
+        //     array_push($countries, $row[0]);                               
+        // }
+
+        // $excelProvinces = (new ProvincesImport)->toArray(storage_path('provinces.xlsx'));
+        // $provinces = array();
+        
+        // foreach($excelProvinces[0] as $key => $province){
+        //     foreach($countries as $country) {
+        //         if($province[1] == $country) {
+        //             $value = array(
+        //                 'Province' => $province[0],
+        //                 'Country' => $country,                     
+        //             );
+        //             array_push($provinces, $value);   
+        //         }
+        //     }   
+        // }
+        // dd($provinces);
+        dd($excel);
+        
+        
     }
-
 }

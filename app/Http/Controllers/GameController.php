@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Imports\CountriesImport;
+use App\Imports\ProvincesImport;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\UsersImport;
 use App\Models\Game;
 use App\Models\User;
 use App\Models\Country;
+use App\Models\Province;
+use App\Models\Storage;
 use Gate;
 use Auth;
 
@@ -28,8 +30,6 @@ class GameController extends Controller
     }
 
     
-
-    
     public function create() 
     {
         if(Gate::denies('create-game')) {
@@ -45,22 +45,63 @@ class GameController extends Controller
             return abort(403, 'Não Autorizado');
         }
 
+        // Game
         $game = new Game();
         $game->user_id  = Auth::user()->id;
         $game->name     = $request->name;
         $game->password = Hash::make($request->password);
-        $game->save();    
-        
+        $game->save();        
+
+        // Countries
+        $excelCountries = (new CountriesImport)->toArray(storage_path('users.xlsx'));
+        $countries = array();
+
+        foreach($excelCountries[0] as $key => $row){
+            array_push($countries, $row[0]);   
+        }
+
+        $excelProvinces = (new ProvincesImport)->toArray(storage_path('provinces.xlsx'));
         foreach($countries as $key => $country) {
+            
             $newCountry = new Country();
             $newCountry->game_id  = $game->id;
             $newCountry->name     = $country;
-            $newCountry->img_slug = Str::slug($country).'.png';
             $newCountry->save(); 
+            
+            // Provinces
+            foreach($excelProvinces[0] as $key => $province){
+                if($province[1] == $country) {
+                    $newProvince = new Province;
+                    $newProvince->country_id = $newCountry->id;
+                    $newProvince->name = $province[0];
+                    $newProvince->population = 25;
+                    $newProvince->save();
+                    
+                    // Resources
+                    $storage = new Storage;
+                    $storage->province_id = $newProvince->id;
+                    $storage->resource_id = $province[2];
+                    $storage->amount = 2000;
+                    $storage->save();
+                    
+                    $storage = new Storage;
+                    $storage->province_id = $newProvince->id;
+                    $storage->resource_id = $province[3];
+                    $storage->amount = 2000;
+                    $storage->save();
+                    
+                    $storage = new Storage;
+                    $storage->province_id = $newProvince->id;
+                    $storage->resource_id = $province[4];
+                    $storage->amount = 2000;
+                    $storage->save();
+                }
+            }
         }
         // $user = User::find(Auth::user()->id);
         // $user->games()->attach($game->id);
         return redirect()->route('home');
+
     }   
 
 

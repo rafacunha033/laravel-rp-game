@@ -1,18 +1,19 @@
 <?php
 namespace App\Imports;
 
-use App\Country;
+use App\Provinces;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 
-class CountriesImport implements ToModel
+class ProvincesImport implements ToModel
 {
     use Importable;
 
     public function model(array $row)
     {
-        return new Country([
+        return new Province([
             'name' => $row[0],
+            'country' => $row[1],
         ]);
     }
 }

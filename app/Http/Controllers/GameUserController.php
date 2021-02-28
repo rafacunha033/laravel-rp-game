@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Map;
 use App\Models\Provinces;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Auth;
 
 class GameUserController extends Controller
@@ -93,9 +94,11 @@ class GameUserController extends Controller
         $user = Auth::user();
         $country = $user->countries->where('game_id', $game_id)->first();
         $provinces = $country->provinces;
+        $image = Str::slug($country->name).'.png';
 
         return view('game/round', [
             'country' => $country,
+            'image' => $image,
             'user' => $user,
             'provinces' => $provinces,
         ]);

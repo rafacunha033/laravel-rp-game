@@ -47,7 +47,7 @@
                 aria-controls="collapseProvinces">
                     <div class="col bg-light text-left d-flex align-items-center rounded" style="width:200px; height: 100px">
                         <div class="img">
-                            <img class="rounded-circle border" src="/images/{{ $country->img_slug }}" width="60" height="60" alt="Imagem do País">
+                            <img class="rounded-circle border" src="/images/flags/{{ $image }}" width="60" height="60" alt="Imagem do País">
                         </div>
                         
                         <div class="info ml-2">

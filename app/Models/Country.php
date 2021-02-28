@@ -23,6 +23,6 @@ class Country extends Model
 
     public function provinces()
     {
-        return $this->belongsToMany(Province::class);
+        return $this->hasMany(Province::class);
     }
 }

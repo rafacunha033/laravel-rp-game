@@ -17,7 +17,6 @@ class CreateCountriesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('game_id');
             $table->string('name');
-            $table->string('img_slug');
             $table->timestamps();
 
             $table->foreign('game_id')->references('id')->on('games');

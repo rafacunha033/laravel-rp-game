@@ -11,4 +11,5 @@ class Resource extends Model
     {
         return $this->belongsToMany(Province::class);
     }
+
 }

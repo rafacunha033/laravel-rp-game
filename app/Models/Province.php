@@ -9,11 +9,15 @@ class Province extends Model
 {
     public function countries()
     {
-        return $this->belongsToMany(Country::class);
+        return $this->belongsTo(Country::class);
     }
     
     public function resources()
     {
         return $this->belongsToMany(Resource::class)->withPivot('amount');
+    }
+    
+    public function amount() {
+        return $this->belongsTo(Resource::class, 'amount');    
     }
 }
