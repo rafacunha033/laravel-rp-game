@@ -58,7 +58,7 @@ class HomeController extends Controller
         //     }   
         // }
         // dd($provinces);
-        dd($excel);
+        // dd($excel);
         
         
     }

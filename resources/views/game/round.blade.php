@@ -36,7 +36,7 @@
 
 <?php $styleCard = "flex-sm-fill d-flex align-items-center justify-content-center"; ?>
 </head>
-<body>
+<body class='bg-smoke'>
 
 <div class="main">
     <div class="accordion" id="navbarSupportedContent">     
@@ -92,8 +92,8 @@
             </div> 
 
             <div class="<?php $styleCard ?>">
-                <button class="btn" type="button" id="optionFour" data-toggle="collapse" data-target="#collapsePolitics"  aria-expanded="false"  
-                aria-controls="collapsePolitics">
+                <button class="btn" type="button" id="optionFour" data-toggle="collapse" data-target="#collapsePolicy"  aria-expanded="false"  
+                aria-controls="collapsePolicy">
                     <div class="col bg-secondary text-left rounded" style="width:200px; height: 100px">
                         <strong>Reformas</strong>
                         <br>
@@ -123,49 +123,29 @@
 
         <!-- Provinces -->
         <div id="collapseProvinces" class="collapse show" aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
-            <div class="card-body">
-               @foreach($provinces as $province)
-                <strong>{{ $province->name }}</strong> 
-               <br>
-                População: {{ number_format($province->population, 0, ',', '.') }}
-               <br>
-                Recursos: <br>
-                @foreach($province->resources as $resource)
-                    {{ $resource->name }} : {{ $resource->pivot->amount }}  <br>
-                @endforeach 
-               <hr>
-
-               @endforeach
-            </div>
+            @include('game.round.provinces')
         </div> 
 
         <!-- ECONOMIA -->
         <div id="collapseEconomy" class="collapse" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
-            <div class="card-body">
-                Economia    
-            </div>
+            @include('game.round.economy')  
         </div> 
         
         <!-- Exército -->
         <div id="collapseArmy" class="collapse" aria-labelledby="optionTwo" data-parent="#navbarSupportedContent">
-            <div class="card-body">
-                Exército    
-            </div>
+            @include('game.round.army')
         </div>
 
-        <div id="collapsePolitics" class="collapse" aria-labelledby="optionFour" data-parent="#navbarSupportedContent">
-            <div class="card-body">
-                Politica   
-            </div>
+        <div id="collapsePolicy" class="collapse" aria-labelledby="optionFour" data-parent="#navbarSupportedContent">
+            @include('game.round.policy')
         </div>
         
         <div id="collapseResearches" class="collapse" aria-labelledby="optionFive" data-parent="#navbarSupportedContent">
-            <div class="card-body">
-                Pesquisas   
-            </div>
+            @include('game.round.researches')
         </div>
     </div>
 </div>
 
 </body>
+
 </html>

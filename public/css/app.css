@@ -6199,6 +6199,10 @@ button.bg-dark:focus {
   border-left: 0 !important;
 }
 
+.border-cadet {
+  border-color: #008B8B !important;
+}
+
 .border-primary {
   border-color: #3490dc !important;
 }
