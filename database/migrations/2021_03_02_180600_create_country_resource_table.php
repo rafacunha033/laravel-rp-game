@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTreasuriesTable extends Migration
+class CreateCountryResourceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTreasuriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('treasuries', function (Blueprint $table) {
+        Schema::create('country_resource', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('country_id');
             $table->unsignedBigInteger('resource_id');
@@ -32,6 +32,6 @@ class CreateTreasuriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('treasuries');
+        Schema::dropIfExists('country_resource');
     }
 }

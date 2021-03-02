@@ -25,4 +25,9 @@ class Country extends Model
     {
         return $this->hasMany(Province::class);
     }
+
+    public function resources()
+    {
+        return $this->belongsToMany(Resource::class)->withPivot('quantity');
+    }
 }

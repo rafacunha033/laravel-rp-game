@@ -36,6 +36,7 @@
 
 <?php $styleCard = "flex-sm-fill d-flex align-items-center justify-content-center"; ?>
 </head>
+
 <body class='bg-smoke'>
 
 <div class="main">
@@ -128,6 +129,7 @@
 
         <!-- ECONOMIA -->
         <div id="collapseEconomy" class="collapse" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
+            
             @include('game.round.economy')  
         </div> 
         
