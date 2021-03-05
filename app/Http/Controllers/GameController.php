@@ -12,6 +12,8 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\Province;
 use App\Models\Storage;
+use App\Models\Treasury;
+use App\Models\Resource;
 use Gate;
 use Auth;
 
@@ -53,7 +55,7 @@ class GameController extends Controller
         $game->save();        
 
         // Countries
-        $excelCountries = (new CountriesImport)->toArray(storage_path('users.xlsx'));
+        $excelCountries = (new CountriesImport)->toArray(storage_path('countries.xlsx'));
         $countries = array();
 
         foreach($excelCountries[0] as $key => $row){
@@ -68,6 +70,17 @@ class GameController extends Controller
             $newCountry->name     = $country;
             $newCountry->save(); 
             
+            // Country-Storage
+            $resources = Resource::all();
+
+            foreach($resources as $resource) {
+                $newTreasury = new Treasury();
+                $newTreasury->country_id = $newCountry->id;
+                $newTreasury->resource_id = $resource->id;
+                $newTreasury->quantity = 0;
+                $newTreasury->save();
+            }
+
             // Provinces
             foreach($excelProvinces[0] as $key => $province){
                 if($province[1] == $country) {

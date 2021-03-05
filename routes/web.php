@@ -32,7 +32,10 @@ Route::get('round/listar', [App\Http\Controllers\GameUserController::class, 'ind
 Route::get('round/criar/{game_id}', [App\Http\Controllers\GameUserController::class, 'create'])->name('create.round');
 Route::get('round/entrar', [App\Http\Controllers\GameUserController::class, 'store'])->name('store.round');
 Route::get('round/{game_id}', [App\Http\Controllers\GameUserController::class, 'show'])->name('show.round');
-// Route::get('/jogo/partida/{game_id}', [App\Http\Controllers\GameController::class, 'show'])->name('show.game');
+Route::post('round/editar', [App\Http\Controllers\GameUserController::class, 'update'])->name('update.round');
+
+// Economy
+Route::put('/economia', [App\Http\Controllers\EconomyController::class, 'changeTax'])->name('update.economy');
 
 // USERS
 Route::get('/users', [App\Http\Controllers\UserController::class, 'index'])->name('index.user');

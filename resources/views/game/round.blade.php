@@ -19,8 +19,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/d3js/6.5.0/d3.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+    
     <style>
         .str0 {
             stroke: #FFFF;
@@ -123,13 +125,12 @@
         </nav>
 
         <!-- Provinces -->
-        <div id="collapseProvinces" class="collapse show" aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
+        <div id="collapseProvinces" class="collapse " aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
             @include('game.round.provinces')
         </div> 
 
         <!-- ECONOMIA -->
-        <div id="collapseEconomy" class="collapse" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
-            
+        <div id="collapseEconomy" class="collapse show" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
             @include('game.round.economy')  
         </div> 
         
