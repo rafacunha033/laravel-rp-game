@@ -23,7 +23,8 @@
 
             <div class="row no-gutters">
                 <div class="col-md-4 ">
-                    <img src="/images/flags/{{ $country->name }}.png" class="img-fluid img-thumbnail" width="500" alt="...">
+                    <img src="/images/flags/{{ Str::slug($country->name) }}.png" class="img-fluid img-thumbnail" width="500" 
+                    alt="..." style='min-height:122px;  max-height: 280px;'>
                 </div>
                 <div class="col-md-8 text-right">
                     <div class="card-body">

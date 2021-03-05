@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center mt-2">
-    <div class="bg-white">
-        <div class="">
+    <div class="bg-white shadow rounded py-3">
+        <div class="d-flex justify-content-center">
             <h5>Recursos</h5>
         </div>
         <div class="container d-flex flex-wrap justify-content-center">
@@ -25,8 +25,12 @@
                 <div class="d-flex justify-content-center">
                     <h5>Imposto</h5>
                 </div>
+
+                <input id="id" type="hidden" value='{{ $country->id }}' name='id'>
+
                 <div class="d-flex justify-content-center align-items-center">
-                    <input type="range" class="form-control-range" id="formControlRange" name='range' value='40' style='min-width:200px;'>
+                    <input type="range" class="form-control-range" id="formControlRange" name='range'
+                    value='{{ $budget->tax }}' style='min-width:200px;'>
                     <div class='justify-content-start align-items-center ml-1' id='tax'></div>% 
                 </div>
                 
@@ -34,12 +38,13 @@
                     <h5>Tarifas</h5>
                 </div>
                 <div class="d-flex justify-content-center align-items-center">    
-                    <input type="range" class="form-control-range" id="formControlRange1" name='range1' value='40' style='min-width:200px;'>
+                    <input type="range" class="form-control-range" id="formControlRange1" name='range1' 
+                    value='{{ $budget->tariff }}' style='min-width:200px;'>
                     <div class='justify-content-start align-items-center ml-1' id='tariff'></div>% 
                 </div>
                 
                 <div class="d-flex justify-content-center mt-3">
-                    <button id="edit" class='btn btn-success' type='submit'>Editar</button>
+                    <button class='btn btn-success' type='submit'>Modificar</button>
                 </div>
             </form>
         </div>         
@@ -56,17 +61,14 @@
                 type: "put",
                 data: {
                     "_token": "{{ csrf_token() }}",
+                    'id': $("#id").val(),
                     'tax': $("#formControlRange").val(),
                     'tariff': $("#formControlRange1").val(),
                 },
-                dataType: 'json',
-                success: function(response){
-                    console.log(response)
-                }
-            });
+                dataType: 'json'
+            })
         });
     });
-   
 
     var slider = document.getElementById("formControlRange");
     var output = document.getElementById("tax");

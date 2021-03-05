@@ -14,6 +14,7 @@ use App\Models\Province;
 use App\Models\Storage;
 use App\Models\Treasury;
 use App\Models\Resource;
+use App\Models\Budget;
 use Gate;
 use Auth;
 
@@ -27,7 +28,7 @@ class GameController extends Controller
         
         $games = Game::orderByDesc('created_at')->get();
         return view('game/listGames', [
-            'games' => $games
+            'games' => $games,
         ]);
     }
 
@@ -81,6 +82,13 @@ class GameController extends Controller
                 $newTreasury->save();
             }
 
+            // Country budget
+            $budget = new Budget;
+            $budget->country_id = $newCountry->id;
+            $budget->tax = 10;
+            $budget->tariff = 10;
+            $budget->save();
+
             // Provinces
             foreach($excelProvinces[0] as $key => $province){
                 if($province[1] == $country) {
@@ -111,8 +119,6 @@ class GameController extends Controller
                 }
             }
         }
-        // $user = User::find(Auth::user()->id);
-        // $user->games()->attach($game->id);
         return redirect()->route('home');
 
     }   

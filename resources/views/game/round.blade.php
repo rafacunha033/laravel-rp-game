@@ -125,12 +125,12 @@
         </nav>
 
         <!-- Provinces -->
-        <div id="collapseProvinces" class="collapse " aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
+        <div id="collapseProvinces" class="collapse show" aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
             @include('game.round.provinces')
         </div> 
 
         <!-- ECONOMIA -->
-        <div id="collapseEconomy" class="collapse show" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
+        <div id="collapseEconomy" class="collapse" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
             @include('game.round.economy')  
         </div> 
         

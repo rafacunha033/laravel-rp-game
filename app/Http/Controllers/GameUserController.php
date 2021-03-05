@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Map;
 use App\Models\Treasury;
 use App\Models\Provinces;
+use App\Models\Budget;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Auth;
@@ -97,6 +98,7 @@ class GameUserController extends Controller
         $provinces = $country->provinces;
         $image = Str::slug($country->name).'.png';
         $treasuries = Treasury::where('country_id', $country->id)->get();
+        $budget = Budget::where('country_id', $country->id)->first();
 
         return view('game/round', [
             'country' => $country,
@@ -104,6 +106,7 @@ class GameUserController extends Controller
             'user' => $user,
             'provinces' => $provinces,
             'treasuries' => $treasuries,
+            'budget' => $budget,
         ]);
     }
 
