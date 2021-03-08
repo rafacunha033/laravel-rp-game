@@ -35,6 +35,7 @@ Route::get('round/{game_id}', [App\Http\Controllers\GameUserController::class, '
 Route::post('round/editar', [App\Http\Controllers\GameUserController::class, 'update'])->name('update.round');
 
 // Economy
+Route::get('/economia/produção', [App\Http\Controllers\EconomyController::class, 'production'])->name('production.economy');
 Route::put('/economia', [App\Http\Controllers\EconomyController::class, 'changeTax'])->name('update.economy');
 
 // USERS

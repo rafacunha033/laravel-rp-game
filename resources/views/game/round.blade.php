@@ -11,6 +11,7 @@
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/economy.js') }}" defer></script>
     
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -57,8 +58,7 @@
                             <strong>{{ $country->name }}</strong>
                             <br>
                             <small>{{ $user->name }}</small>
-                            <br>
-                            
+                            <br>                            
                         </div>
                     </div>
                 </button>         
@@ -125,12 +125,12 @@
         </nav>
 
         <!-- Provinces -->
-        <div id="collapseProvinces" class="collapse show" aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
+        <div id="collapseProvinces" class="collapse" aria-labelledby="optionThree" data-parent="#navbarSupportedContent">
             @include('game.round.provinces')
         </div> 
 
         <!-- ECONOMIA -->
-        <div id="collapseEconomy" class="collapse" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
+        <div id="collapseEconomy" class="collapse show" aria-labelledby="optionOne" data-parent="#navbarSupportedContent">
             @include('game.round.economy')  
         </div> 
         

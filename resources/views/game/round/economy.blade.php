@@ -26,7 +26,7 @@
                     <h5>Imposto</h5>
                 </div>
 
-                <input id="id" type="hidden" value='{{ $country->id }}' name='id'>
+                <input id="country_id" type="hidden" value='{{ $country->id }}' name='id'>
 
                 <div class="d-flex justify-content-center align-items-center">
                     <input type="range" class="form-control-range" id="formControlRange" name='range'
@@ -61,9 +61,19 @@
                 type: "put",
                 data: {
                     "_token": "{{ csrf_token() }}",
-                    'id': $("#id").val(),
+                    'country_id': $("#country_id").val(),
                     'tax': $("#formControlRange").val(),
                     'tariff': $("#formControlRange1").val(),
+                },
+                dataType: 'json'
+            })
+
+            $.ajax({
+                url: "{{ route('production.economy') }}",
+                type: "get",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    "country_id": $("#country_id").val(),
                 },
                 dataType: 'json'
             })
