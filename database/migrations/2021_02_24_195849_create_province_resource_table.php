@@ -17,6 +17,7 @@ class CreateProvinceResourceTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('province_id');
             $table->unsignedBigInteger('resource_id');
+            $table->float('amount');
             $table->timestamps();
 
             $table->foreign('province_id')->references('id')->on('provinces');

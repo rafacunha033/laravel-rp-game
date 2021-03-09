@@ -17,5 +17,9 @@ class Resource extends Model
         return $this->belongsToMany(Country::class)->withPivot('quantity');
     }
     
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 
 }

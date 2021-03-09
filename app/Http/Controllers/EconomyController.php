@@ -34,38 +34,54 @@ class EconomyController extends Controller
         // recursos
         $resources = Resource::all(); 
         $allResources = array();
-
-        // Take the resources and put into array
         foreach($resources as $resource) {
             $newResource = array(
                 "id" => $resource->id,
-                "quantity" => 20,
+                "quantity" => 0
             );
+
             array_push($allResources, $newResource);
         }
-
-        // country and provinces        
-        $country = Country::find($data['country_id']);
-        $provinces = Province::where('country_id', $data['country_id'])->get();
         
+
+        $country = Country::find($data['country_id']);
+        $provinces = Province::where('country_id' ,$data['country_id'])->get();
+        
+        // provincias
         foreach($provinces as $province) {
-            // take the province population 
-            $provincePop = $province->population;
-            
+            foreach($province->resources as $resource) {                
+                $id = ($resource->id)-1;                  
 
-            // take each province resource
-            foreach($province->resources as $resource) {
-                
-                // search the resource id in the array
-                $id = ($resource->id)-1;
-                $key = array_search($id, array_column($allResources, 'id'));
-
-                if($key) {
+                if($resource->category_id === 1) {                    
+                    $production = ($province->farmers) * $resource->pivot->amount; 
                     $quantity = $allResources[$id]['quantity'];
-                    $allResources[$id]['quantity'] = $quantity+10;
-                }        
+                    $allResources[$id]['quantity'] = $quantity + $production;
+                    // echo "<br> [". $province->name ."] [". $resource->name ." : ". $resource->id ."] Quantidade: ".$allResources[$id]['quantity'];
+                
+
+                } elseif($resource->category_id === 2) {
+                    $production = ($province->artisans) * $resource->pivot->amount;
+                    $quantity = $allResources[$id]['quantity'];
+                    $allResources[$id]['quantity'] = $quantity + $production;
+                    // echo "<br> [". $province->name ."] [". $resource->name ." : ". $resource->id ."] Quantidade: ".$allResources[$id]['quantity'];
+                
+
+                } else {
+                    $production = ($province->laborers) * $resource->pivot->amount;
+                    $quantity = $allResources[$id]['quantity'];
+                    $allResources[$id]['quantity'] = $quantity + $production;
+                    // echo "<br> [". $province->name ."] [". $resource->name ." : ". $resource->id ."] Quantidade: ".$allResources[$id]['quantity'];
+                }
             }
+
         }
+
+        $treasury = Treasury::where('country_id', $country->id)->get();
+
+        foreach($treasury as $resources) {
+            $resources->quantity = 20;
+            $resources->save();
+        }        
     }
 
     public function buy()

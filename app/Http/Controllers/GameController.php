@@ -95,7 +95,10 @@ class GameController extends Controller
                     $newProvince = new Province;
                     $newProvince->country_id = $newCountry->id;
                     $newProvince->name = $province[0];
-                    $newProvince->population = 25;
+                    $newProvince->artisans = $province[5];
+                    $newProvince->farmers = $province[6];
+                    $newProvince->laborers = $province[7];
+                    $newProvince->population = ($province[5]+$province[6]+$province[7])*1.1;
                     $newProvince->save();
                     
                     // Resources

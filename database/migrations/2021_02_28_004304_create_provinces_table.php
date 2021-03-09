@@ -17,6 +17,9 @@ class CreateProvincesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('country_id');
             $table->string('name');
+            $table->float('artisans');
+            $table->float('farmers');
+            $table->float('laborers');
             $table->float('population');
             $table->timestamps();
 
